@@ -6,16 +6,16 @@ export default auth((req) => {
 
     const userIsLoggedIn = !!req.auth;
 
-    const blockedRoutes = ["/dashboard", "/chat"]
+    const blockedRoutes = ["/chat"]
 
     const isProtectedRoute = blockedRoutes.some((route) =>
         req.nextUrl.pathname.startsWith(route)
     )
 
-//   if (req.nextUrl.pathname === "/"){
-//     return NextResponse.redirect(new URL("/chat", req.url))
-//   }
-//   else
+  if (req.nextUrl.pathname === "/"){
+    return NextResponse.redirect(new URL("/chat", req.url))
+  }
+  else
    if (isProtectedRoute && !userIsLoggedIn) {
     return NextResponse.redirect(new URL("/login", req.url))
   }
